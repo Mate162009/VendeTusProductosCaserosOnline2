@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito y Pedidos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #b3e5fc;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #01579b;
+    }
+
+    .boton-volver {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #0288d1;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .boton-volver:hover {
+      background-color: #0277bd;
+    }
+
+    .carrito-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .icono-carrito {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .lista-compra {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 15px;
+      width: 240px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .lista-compra h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #bf360c;
+    }
+
+    .lista-compra ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .lista-compra li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lista-compra img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .contenido {
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .contenido h2 {
+      color: #0288d1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Carrito arriba a la derecha -->
+  <div class="carrito-container">
+    <img src="carrito.png" alt="Carrito de compras" class="icono-carrito" onclick="toggleListaCompra()">
+    <div id="lista-compra" class="lista-compra">
+      <h3>Carrito</h3>
+      <ul>
+        <li>
+          <img src="torta.jpg" alt="Torta casera">
+          Torta Casera x1
+        </li>
+        <li>
+          <img src="mermelada.jpg" alt="Mermelada de frutilla">
+          Mermelada x2
+        </li>
+        <li>
+          <img src="pan casero.jpg" alt="Pan casero">
+          Pan Casero x1
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <header>
+    <h1>Carrito y Pedidos</h1>
+    <a class="boton-volver" href="index.html">Volver a la página principal</a>
+  </header>
+
+  <div class="contenido">
+    <h2>Estado de tu pedido</h2>
+    <p>Gracias por confiar en nuestra tienda casera. Aquí podrás revisar los productos seleccionados y confirmar tu pedido.</p>
+    <p>En breve recibirás un correo de confirmación con los detalles y opciones de entrega.</p>
+  </div>
+
+  <script>
+    function toggleListaCompra() {
+      const lista = document.getElementById('lista-compra');
+      lista.style.display = (lista.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

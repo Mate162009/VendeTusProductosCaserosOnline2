@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalización del Pedido - Productos Caseros</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff8e1;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffcc80;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      color: #5a3e2b;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .volver {
+      background-color: #ffb74d;
+      border: none;
+      color: #4e342e;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .volver:hover {
+      background-color: #ffa726;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #5a3e2b;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #4e342e;
+    }
+
+    select, textarea, input[type="text"] {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      background-color: #ffb74d;
+      border: none;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #ffa726;
+    }
+
+    .mensaje {
+      background-color: #c8e6c9;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      color: #2e7d32;
+      font-weight: bold;
+      margin-top: 15px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #ffcc80;
+      padding: 15px;
+      color: #4e342e;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="volver" onclick="window.location.href='catalogo.html'">⬅ Volver al catálogo</button>
+    <h1>Personalización del Pedido</h1>
+  </header>
+
+  <main>
+    <h2>📦 Elige cómo personalizar tu pedido</h2>
+    <form id="form-personalizacion" onsubmit="enviarPedido(event)">
+      <label for="producto">Producto:</label>
+      <select id="producto" required>
+        <option value="">Selecciona un producto</option>
+        <option>Pan casero</option>
+        <option>Galletas de avena</option>
+        <option>Dulce de leche casero</option>
+      </select>
+
+      <label for="sabor">Sabor o tipo:</label>
+      <select id="sabor" required>
+        <option value="">Elige una opción</option>
+        <option>Tradicional</option>
+        <option>Chocolate</option>
+        <option>Vainilla</option>
+        <option>Integral</option>
+      </select>
+
+      <label for="envoltorio">Tipo de envoltorio:</label>
+      <select id="envoltorio" required>
+        <option value="">Selecciona el envoltorio</option>
+        <option>Clásico (papel madera)</option>
+        <option>Regalo (papel decorado y moña)</option>
+        <option>Eco (reutilizable)</option>
+      </select>
+
+      <label for="tarjeta">Mensaje para tarjeta personalizada:</label>
+      <textarea id="tarjeta" placeholder="Escribe tu mensaje... (opcional)"></textarea>
+
+      <button type="submit">Enviar pedido personalizado</button>
+      <div class="mensaje" id="mensaje-exito">✅ Tu pedido ha sido enviado con éxito.</div>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 Productos Caseros - Personaliza tu pedido
+  </footer>
+
+  <script>
+    function enviarPedido(event) {
+      event.preventDefault();
+
+      const producto = document.getElementById("producto").value;
+      const sabor = document.getElementById("sabor").value;
+      const envoltorio = document.getElementById("envoltorio").value;
+      const tarjeta = document.getElementById("tarjeta").value;
+
+      if (!producto || !sabor || !envoltorio) {
+        alert("Por favor, completa todos los campos requeridos.");
+        return;
+      }
+
+      const mensaje = `
+      Producto: ${producto}
+      Sabor: ${sabor}
+      Envoltorio: ${envoltorio}
+      Tarjeta: ${tarjeta || "Sin mensaje"}
+      `;
+
+      console.log("Pedido personalizado enviado:\n" + mensaje);
+      document.getElementById("mensaje-exito").style.display = "block";
+      document.getElementById("form-personalizacion").reset();
+    }
+  </script>
+
+</body>
+</html>

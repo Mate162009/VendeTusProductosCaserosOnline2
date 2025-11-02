@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atención al Cliente - Tienda Casera</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff3e0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #f7c37a;
+      color: #4e342e;
+      text-align: center;
+      padding: 30px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    header p {
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    .contact-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .contact-card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 280px;
+      text-align: center;
+      padding: 25px;
+      transition: transform 0.2s;
+    }
+
+    .contact-card:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-card h3 {
+      color: #4e342e;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: #5d4037;
+      font-size: 15px;
+    }
+
+    /* Botón flotante de WhatsApp */
+    .whatsapp-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-decoration: none;
+      z-index: 1000;
+    }
+
+    .whatsapp-chat:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-tooltip {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #fff;
+      color: #333;
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      font-size: 14px;
+      display: none;
+    }
+
+    .whatsapp-chat:hover + .whatsapp-tooltip {
+      display: block;
+    }
+
+    footer {
+      background-color: #f7c37a;
+      text-align: center;
+      padding: 15px;
+      color: #4e342e;
+      font-size: 14px;
+    }
+
+    a {
+      color: #4e342e;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>💬 Atención al Cliente</h1>
+    <p>¿Tenés alguna pregunta o querés hacer un pedido personalizado? Estamos para ayudarte</p>
+  </header>
+
+  <section class="contact-section">
+    <div class="contact-card">
+      <h3>📞 WhatsApp</h3>
+      <p>Escribinos directamente para consultas o pedidos rápidos.</p>
+      <a href="https://wa.me/598XXXXXXXX?text=Hola%20quiero%20consultar%20sobre%20los%20productos%20caseros" target="_blank">Chatear ahora</a>
+    </div>
+
+    <div class="contact-card">
+      <h3>📧 Correo electrónico</h3>
+      <p>Si preferís, también podés escribirnos a:</p>
+      <p><strong>contacto@tiendacasera.com</strong></p>
+    </div>
+
+    <div class="contact-card">
+      <h3>📸 Redes Sociales</h3>
+      <p>Seguinos para ver las últimas novedades y productos.</p>
+      <p>Instagram: <a href="#">@TiendaCasera</a></p>
+      <p>Facebook: <a href="#">Tienda Casera</a></p>
+    </div>
+  </section>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://wa.me/59898606467?text=Hola%20quiero%20consultar%20sobre%20los%20productos%20caseros" 
+     class="whatsapp-chat" target="_blank" title="Chatear por WhatsApp">
+    🟢
+  </a>
+  <div class="whatsapp-tooltip">¿Necesitás ayuda? 💬</div>
+
+  <footer>
+    <p>© 2025 Tienda Casera — Hecho con amor| <a href="index.html">Volver a la página principal</a></p>
+  </footer>
+
+</body>
+</html>
+

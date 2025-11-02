@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reclamos - Tienda Casera</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #ffa726;
+      background-image:
+        radial-gradient(circle at 20% 20%, white 10px, transparent 11px),
+        radial-gradient(circle at 80% 30%, white 8px, transparent 9px),
+        radial-gradient(circle at 50% 80%, white 12px, transparent 13px),
+        radial-gradient(circle at 70% 60%, white 6px, transparent 7px),
+        radial-gradient(circle at 30% 90%, white 9px, transparent 10px);
+      background-repeat: no-repeat;
+      background-size: 100vw 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: 36px;
+      color: #263238;
+    }
+    form {
+      background-color: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input, select, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 16px;
+      width: 100%;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      padding: 12px;
+      background-color: #ef6c00;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e65100;
+    }
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .boton-volver {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #ef6c00;
+      color: white;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+    .boton-volver:hover {
+      background-color: #e65100;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Formulario de Reclamos</h1>
+  </header>
+
+  <form id="reclamoForm">
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono">
+
+    <label for="pedido">Número de pedido:</label>
+    <input type="text" id="pedido" name="pedido">
+
+    <label for="producto">Producto:</label>
+    <input type="text" id="producto" name="producto">
+
+    <label for="tipo">Tipo de reclamo:</label>
+    <select id="tipo" name="tipo" required>
+      <option value="">Seleccionar...</option>
+      <option value="producto">Problema con el producto</option>
+      <option value="pago">Problema con el pago</option>
+      <option value="envio">Problema con el envío</option>
+      <option value="otro">Otro</option>
+    </select>
+
+    <label for="descripcion">Descripción del reclamo:</label>
+    <textarea id="descripcion" name="descripcion" required></textarea>
+
+    <label for="imagen">Adjuntar imagen (opcional):</label>
+    <input type="file" id="imagen" name="imagen" accept="image/*">
+
+    <div class="acciones">
+      <button type="button" onclick="guardarLocal()">Guardar borrador</button>
+      <button type="button" onclick="enviarCorreo()">Enviar por correo</button>
+      <button type="button" onclick="descargarReclamo()">Descargar JSON</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+
+  <a class="boton-volver" href="index.html">⬅ Volver a la página principal</a>
+
+  <script>
+    function guardarLocal() {
+      const datos = obtenerDatos();
+      localStorage.setItem("reclamo", JSON.stringify(datos));
+      alert("Reclamo guardado localmente.");
+    }
+    function enviarCorreo() {
+      const datos = obtenerDatos();
+      const cuerpo = `
+Nombre: ${datos.nombre}
+Email: ${datos.email}
+Teléfono: ${datos.telefono}
+Pedido: ${datos.pedido}
+Producto: ${datos.producto}
+Tipo: ${datos.tipo}
+Descripción: ${datos.descripcion}`;
+      window.location.href = "mailto:tienda@correo.com?subject=Reclamo Tienda Casera&body=" + encodeURIComponent(cuerpo);
+    }
+    function descargarReclamo() {
+      const datos = obtenerDatos();
+      const blob = new Blob([JSON.stringify(datos, null, 2)], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "reclamo.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    function obtenerDatos() {
+      return {
+        nombre: document.getElementById("nombre").value,
+        email: document.getElementById("email").value,
+        telefono: document.getElementById("telefono").value,
+        pedido: document.getElementById("pedido").value,
+        producto: document.getElementById("producto").value,
+        tipo: document.getElementById("tipo").value,
+        descripcion: document.getElementById("descripcion").value
+      };
+    }
+  </script>
+</body>
+</html>

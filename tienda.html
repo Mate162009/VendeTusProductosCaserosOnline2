@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda Casera - Productos</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff3e0;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      color: #e65100;
+      margin-bottom: 5px;
+    }
+    header p {
+      color: #bf360c;
+      font-style: italic;
+      margin-top: 0;
+    }
+    .contenedor {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .producto {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      width: 260px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .producto img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .producto h3 {
+      margin: 0 0 8px;
+      color: #bf360c;
+    }
+    .producto p {
+      flex-grow: 1;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    .precio {
+      font-weight: bold;
+      color: #e65100;
+      margin-bottom: 12px;
+    }
+    button {
+      background-color: #ef6c00;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #e65100;
+    }
+    /* Carrito */
+    #carrito {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      width: 320px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 15px;
+      z-index: 1000;
+    }
+    #carrito h2 {
+      margin-top: 0;
+      color: #bf360c;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    #lista-carrito {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    #lista-carrito li {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    #lista-carrito li span {
+      font-weight: bold;
+      color: #e65100;
+    }
+    #total {
+      font-weight: bold;
+      font-size: 18px;
+      color: #bf360c;
+      text-align: right;
+      margin-top: 10px;
+    }
+    #vaciar-carrito {
+      background-color: #d32f2f;
+      margin-top: 10px;
+      width: 100%;
+    }
+    #vaciar-carrito:hover {
+      background-color: #b71c1c;
+    }
+    /* Formulario subir producto (demo local) */
+    #form-subir {
+      margin-top: 40px;
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #form-subir h2 {
+      margin-top: 0;
+      color: #bf360c;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #form-subir input, 
+    #form-subir textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    #form-subir button {
+      width: 100%;
+      margin-top: 10px;
+    }
+    /* Botón fijo volver a inicio */
+    .boton-inicio {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #ef6c00;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 16px;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    .boton-inicio:hover {
+      background-color: #e65100;
+    }
+    /* Responsive */
+    @media(max-width: 768px) {
+      .contenedor {
+        flex-direction: column;
+        align-items: center;
+      }
+      #carrito {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-bottom: 30px;
+      }
+      .boton-inicio {
+        position: static;
+        margin-bottom: 15px;
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón volver a inicio -->
+  <a href="index.html" class="boton-inicio">← Volver a Inicio</a>
+
+  <header>
+    <h1>Tienda Casera</h1>
+    <p>Productos caseros con sabor y calidad artesanal</p>
+  </header>
+
+  <div class="contenedor" id="productos-container">
+    <!-- Productos cargados dinámicamente aquí -->
+  </div>
+
+  <!-- Carrito -->
+  <div id="carrito">
+    <h2>Tu Carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <div id="total">Total: $0</div>
+    <button id="vaciar-carrito">Vaciar carrito</button>
+  </div>
+
+  <!-- Formulario para subir producto (solo demo local) -->
+  <form id="form-subir">
+    <h2>Subí tu producto</h2>
+    <input type="text" id="nombre-prod" placeholder="Nombre del producto" required />
+    <textarea id="desc-prod" rows="3" placeholder="Descripción" required></textarea>
+    <input type="number" id="precio-prod" placeholder="Precio (ej: 250)" min="1" required />
+    <input type="url" id="img-prod" placeholder="URL imagen del producto" required />
+    <button type="submit">Agregar producto</button>
+  </form>
+
+  <script>
+    // Productos iniciales de ejemplo
+    let productos = [
+      {
+        id: 1,
+        nombre: "Torta Casera",
+        descripcion: "Bizcochuelo esponjoso hecho con ingredientes naturales. Ideal para el desayuno o la merienda.",
+        precio: 350,
+        imagen: "torta.jpg"
+      },
+      {
+        id: 2,
+        nombre: "Mermeladas Artesanales",
+        descripcion: "Mermeladas caseras de frutas naturales. Sin conservantes ni aditivos.",
+        precio: 250,
+        imagen: "mermelada.jpg"
+      },
+      {
+        id: 3,
+        nombre: "Pan Casero",
+        descripcion: "Pan casero fresco hecho con masa madre y recetas tradicionales.",
+        precio: 150,
+        imagen: "pan casero.jpg"
+      }
+    ];
+
+    let carrito = [];
+
+    const contenedorProductos = document.getElementById("productos-container");
+
+    function mostrarProductos() {
+      contenedorProductos.innerHTML = "";
+      productos.forEach(prod => {
+        const card = document.createElement("div");
+        card.className = "producto";
+        card.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+          <h3>${prod.nombre}</h3>
+          <p>${prod.descripcion}</p>
+          <div class="precio">$${prod.precio}</div>
+          <button onclick="agregarAlCarrito(${prod.id})">Agregar al carrito</button>
+        `;
+        contenedorProductos.appendChild(card);
+      });
+    }
+
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+    function actualizarCarrito() {
+      listaCarrito.innerHTML = "";
+      let total = 0;
+      carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+        const li = document.createElement("li");
+        li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`;
+        listaCarrito.appendChild(li);
+      });
+      totalCarrito.textContent = `Total: $${total}`;
+    }
+
+    function agregarAlCarrito(id) {
+      const producto = productos.find(p => p.id === id);
+      if (!producto) return;
+
+      const existe = carrito.find(item => item.id === id);
+      if (existe) {
+        existe.cantidad++;
+      } else {
+        carrito.push({...producto, cantidad:1});
+      }
+      actualizarCarrito();
+    }
+
+    document.getElementById("vaciar-carrito").addEventListener("click", () => {
+      carrito = [];
+      actualizarCarrito();
+    });
+
+    const formSubir = document.getElementById("form-subir");
+    formSubir.addEventListener("submit", e => {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre-prod").value.trim();
+      const descripcion = document.getElementById("desc-prod").value.trim();
+      const precio = parseFloat(document.getElementById("precio-prod").value);
+      const imagen = document.getElementById("img-prod").value.trim();
+
+      if(nombre && descripcion && precio > 0 && imagen) {
+        const nuevoId = productos.length ? productos[productos.length -1].id + 1 : 1;
+        productos.push({
+          id: nuevoId,
+          nombre,
+          descripcion,
+          precio,
+          imagen
+        });
+        mostrarProductos();
+        formSubir.reset();
+        alert("Producto agregado con éxito!");
+      } else {
+        alert("Completa todos los campos correctamente.");
+      }
+    });
+
+    mostrarProductos();
+    actualizarCarrito();
+  </script>
+</body>
+</html>
+

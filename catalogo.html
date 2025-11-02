@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Productos Caseros</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff3e0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffcc80;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      color: #5a3e2b;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    /* Botón de volver */
+    .volver {
+      background-color: #ffb74d;
+      border: none;
+      color: #4e342e;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      margin-right: 15px;
+    }
+
+    .volver:hover {
+      background-color: #ffa726;
+    }
+
+    .carrito {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .carrito img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .contador {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d84315;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+
+    .producto {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      background-color: #fff;
+      transition: transform 0.3s;
+    }
+
+    .producto:hover {
+      transform: scale(1.03);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .info h3 {
+      margin: 8px 0;
+      font-size: 18px;
+      color: #5a3e2b;
+    }
+
+    .info p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #4e342e;
+    }
+
+    .info button {
+      background-color: #ffb74d;
+      border: none;
+      color: #000;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .info button:hover {
+      background-color: #ffa726;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Encabezado -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <button class="volver" onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+      <h1>Productos Caseros</h1>
+    </div>
+    <div class="carrito" id="carrito">
+      <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Carrito de compras">
+      <span class="contador" id="contador">0</span>
+    </div>
+  </header>
+
+  <!-- 🔹 Catálogo -->
+  <div class="catalogo">
+    <div class="producto">
+      <img src="pancasero.jpg" alt="Pan casero">
+      <div class="info">
+        <h3>Pan casero</h3>
+        <p>Ingredientes: harina, levadura, agua, amor</p>
+        <p>Precio: $180</p>
+        <button onclick="agregarAlCarrito('Pan casero', 180)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="producto">
+      <img src="galletasavena.jpg.webp" alt="Galletas de avena con chocolate">
+      <div class="info">
+        <h3>Galletas de avena</h3>
+        <p>Ingredientes: avena, miel, chips de chocolate</p>
+        <p>Precio: $150</p>
+        <button onclick="agregarAlCarrito('Galletas de avena', 150)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="producto">
+      <img src="dulcedeleche.jpg" alt="Dulce de leche casero">
+      <div class="info">
+        <h3>Dulce de leche casero</h3>
+        <p>Ingredientes: leche, azúcar, vainilla</p>
+        <p>Precio: $250</p>
+        <button onclick="agregarAlCarrito('Dulce de leche casero', 250)">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let contador = 0;
+    let carrito = [];
+
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      contador++;
+      document.getElementById("contador").textContent = contador;
+      alert(`${nombre} agregado al carrito ($${precio}).`);
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+

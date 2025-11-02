@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda Casera - Página 1</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" /> 
+  <style> 
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #ffa726;
+      background-image:
+        radial-gradient(circle at 20% 20%, white 10px, transparent 11px),
+        radial-gradient(circle at 80% 30%, white 8px, transparent 9px),
+        radial-gradient(circle at 50% 80%, white 12px, transparent 13px),
+        radial-gradient(circle at 70% 60%, white 6px, transparent 7px),
+        radial-gradient(circle at 30% 90%, white 9px, transparent 10px);
+      background-repeat: no-repeat;
+      background-size: 100vw 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #263238;
+    }
+
+    .productos, .ideas {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .burbuja {
+      background-color: white;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      padding: 25px;
+      max-width: 280px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      flex: 1 1 280px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .burbuja.sobre-nosotros {
+      max-width: 900px;
+      flex: 1 1 100%;
+    }
+
+    .burbuja h2 {
+      margin-top: 0;
+      color: #bf360c;
+      font-size: 24px;
+    }
+
+    .contenido {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .burbuja.activa .contenido {
+      max-height: 1000px;
+      margin-top: 10px;
+    }
+
+    .producto img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .contenido img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .boton-pagina {
+      padding: 12px 24px;
+      background-color: #ef6c00;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 30px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .boton-pagina:hover {
+      background-color: #e65100;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vende tus productos caseros online</h1>
+  </header>
+
+  <section class="productos">
+    <div class="burbuja producto" onclick="toggleBurbuja(this)">
+      <img src="torta.jpg" alt="Torta casera" />
+      <h2>Producto: Torta Casera</h2>
+      <div class="contenido">
+        <p>Bizcochuelo esponjoso hecho con ingredientes naturales. Ideal para el desayuno o la merienda.</p>
+      </div>
+    </div>
+
+    <div class="burbuja producto" onclick="toggleBurbuja(this)">
+      <img src="mermelada.jpg" alt="Frascos de mermelada casera" />
+      <h2>Producto: Mermeladas Artesanales</h2>
+      <div class="contenido">
+        <p>Mermeladas caseras de frutas naturales. Sin conservantes ni aditivos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ideas">
+    <div class="burbuja sobre-nosotros" onclick="toggleBurbuja(this)">
+      <h2>Sobre Nosotros (Introducción)</h2>
+      <div class="contenido">
+        <p>
+         En la actualidad, los productos caseros han cobrado un valor especial dentro del mercado, ya que representan calidad, tradición y un trato más personalizado...
+        </p>
+      </div>
+    </div>
+
+    <!-- Ideas con imágenes -->
+    <div class="burbuja" onclick="toggleBurbuja(this)">
+      <h2>Idea 1: Plataforma Simple</h2>
+      <div class="contenido">
+        <p>Personas podrán vender sin conocimientos técnicos.</p>
+        <img src="idea1.jpg" alt="Plataforma simple para vender productos" />
+      </div>
+    </div>
+
+    <div class="burbuja" onclick="toggleBurbuja(this)">
+      <h2>Idea 2: Subida de Productos</h2>
+      <div class="contenido">
+        <p>Subida fácil con imágenes, descripciones y etiquetas.</p>
+        <img src="idea2.jpg" alt="Pantalla de subida de productos" />
+      </div>
+    </div>
+
+    <div class="burbuja" onclick="toggleBurbuja(this)">
+      <h2>Idea 3: Carrito y Pedidos</h2>
+      <div class="contenido">
+        <p>Carrito de compras y notificaciones automáticas al vendedor.</p>
+        <img src="idea3.jpg" alt="Carrito de compras y pedidos" />
+      </div>
+    </div>
+
+    <div class="burbuja" onclick="toggleBurbuja(this)">
+      <h2>Idea 4: Responsive</h2>
+      <div class="contenido">
+        <p>La tienda se adapta a celulares y tablets automáticamente.</p>
+        <img src="idea4.jpg" alt="Diseño responsive adaptable a móviles" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Botones de navegación -->
+  <a class="boton-pagina" href="contacto.html">Ir a Página 2: Contacto y Pago</a> 
+  <a class="boton-pagina" href="carrito.html">Ir a Carrito y Pedidos</a> 
+  <a class="boton-pagina" href="tienda.html">Ir a Tienda</a> 
+  <a class="boton-pagina" href="reclamo.html">Ir a Página de Reclamos</a>
+  <a class="boton-pagina" href="opiniones.html">Ir a Opiniones y Calificaciones</a>
+  <a class="boton-pagina" href="categoria.html">Ir a Categoria</a>
+  <a class="boton-pagina" href="catalogo.html"Ir a Catalogo</a>
+  <a class="boton-pagina" href="personalizacion.html"Ir a personalizacion</a></a>
+  <a class="boton-pagina" href="atencionalcliente.html"Ir a atencionalcliente</a></a>
+
+  <script> 
+    function toggleBurbuja(burbuja) { 
+      burbuja.classList.toggle("activa"); 
+    } 
+  </script> 
+</body>
+</html>
